@@ -3,6 +3,7 @@
 
 # Virtual environments
 .venv/
+media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
