@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from products.views import home
+from blog.views import blog_add
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('users/', include('users.urls')),
+    path('blog/', blog_add, name='blog'),
 ]
 
 if settings.DEBUG:

@@ -3,8 +3,8 @@ from users.models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email',)
-    list_filter = ('email',)
-    search_fields = ('email',)
+    list_display = ('email', 'first_name', 'last_name', 'age')
+    list_filter = ('email', 'first_name', 'last_name', 'age')
+    search_fields = ('email', 'first_name', 'last_name')
 
 admin.site.register(User, UserAdmin)

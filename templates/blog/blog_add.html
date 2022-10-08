@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}NEWS BLOG{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+          <h1>Новостной блог</h1>
+        <form method="POST" class="post-form">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+    <div>
+            {% if blog %}
+            <ul>
+                {% for bl in blog %}
+                <li>
+                    <p>Заголовок - {{ bl.title }}</p>
+                    <p>Новость - {{ bl.text }}</p>
+                    <p>Автор: {{  bl.author }}</p>
+                    <p>Дата создания - {{ bl.created_at }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>Новостей нет</p>
+            {% endif %}
+    </div>
+{% endblock %}
+
