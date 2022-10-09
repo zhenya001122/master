@@ -1,5 +1,5 @@
 from django.db import models
-# from orders.models import Order
+from orders.models import Order
 
 STATUS_CHOICES = (
     ('in_stock', 'в наличии'),
@@ -26,12 +26,12 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
     status = models.ForeignKey(Status, related_name="products", on_delete=models.CASCADE)
 
-# class Purchase(models.Model):
-#     user = models.ForeignKey(
-#         'users.User', related_name="purchases", on_delete=models.CASCADE
-#     )
-#     product = models.ForeignKey(
-#         Product, related_name="purchases", on_delete=models.CASCADE
-#     )
-#     order = models.ForeignKey(Order, related_name='purchases', on_delete=models.CASCADE())
-#     count = models.IntegerField()
+class Purchase(models.Model):
+    user = models.ForeignKey(
+        'users.User', related_name="purchases", on_delete=models.CASCADE
+    )
+    product = models.ForeignKey(
+        Product, related_name="purchases", on_delete=models.CASCADE
+    )
+    order = models.ForeignKey(Order, related_name='purchases', on_delete=models.CASCADE)
+    count = models.IntegerField()
