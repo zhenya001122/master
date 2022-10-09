@@ -1,5 +1,10 @@
 from django.db import models
 
+STATUS_CHOICES = (
+    ('in_stock', 'в наличии'),
+    ('not_in_stock', 'нет на складе')
+)
+
 
 class Category(models.Model):
     power_tool = models.CharField(max_length=20, verbose_name='Электроинструмент')
@@ -7,8 +12,8 @@ class Category(models.Model):
     household_tool = models.CharField(max_length=20, verbose_name='Хозяйственный инструмент')
 
 class Status(models.Model):
-    in_stock = models.CharField(max_length=20)
-    not_available = models.CharField(max_length=20)
+    availability = models.CharField(max_length=20, choices=STATUS_CHOICES,
+                                    verbose_name='Наличие', blank=True, null=True)
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
@@ -19,10 +24,3 @@ class Product(models.Model):
     stock = models.IntegerField()
     category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
     status = models.ForeignKey(Status, related_name="products", on_delete=models.CASCADE)
-
-class Comment(models.Model):
-    text = models.CharField(max_length=200)
-    product = models.ForeignKey(Product, related_name="comments", on_delete=models.CASCADE)
-    user = models.ForeignKey(
-        'users.User', on_delete=models.CASCADE
-    )
