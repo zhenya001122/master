@@ -101,7 +101,7 @@ DATABASES = {
     }
 }
 
-
+# postgres://chkjfpqzqvcxea:81b4001d1c0f49cf0a39d9219cfd173891ca17db8f0c78075a5051aa2052a931@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/d5re976tvlim8l
 
 
 # Password validation
@@ -144,9 +144,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "master" / "static"]
 
-STATIC_ROOT = None
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "static/"
 
 MEDIA_ROOT = BASE_DIR / "media"
