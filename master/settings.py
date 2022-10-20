@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-*-pe-@4i+qnrbv&ep!5q^@w96zy^9kyip$52k@(7=g!7k==mos
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost", "https://home-master.herokuapp.com"]
+
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "users.User"
