@@ -27,7 +27,7 @@ DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost", "https://home-master.herokuapp.com"]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = "users.User"
 
