@@ -1,10 +1,10 @@
 from django.db import models
-
+from users.models import User
 
 
 class Blog(models.Model):
     author = models.ForeignKey(
-        'users.User',
+        User,
         on_delete=models.CASCADE,
         related_name="blogs",
         blank=True,

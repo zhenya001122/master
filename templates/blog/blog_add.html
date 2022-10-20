@@ -24,7 +24,7 @@
                 <li>
                     <p>Заголовок - {{ bl.title }}</p>
                     <p>Новость - {{ bl.text }}</p>
-                    <p>Автор: {{  bl.author }}</p>
+                    <p>Автор: {{  bl.author.last_name }} {{ bl.author.first_name }}</p>
                     <p>Дата создания - {{ bl.created_at }}</p>
                 </li>
                 {% endfor %}

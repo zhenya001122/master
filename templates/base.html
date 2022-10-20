@@ -15,7 +15,7 @@
     <p>Здесь классный Frontend, просто он невидимый</p>
     <ul>
       <li><p> <a href="/">Главная</a></p></li>
-      <li><p> <a href="admin/">Админка</a></p></li>
+      <li><p> <a href="/admin">Админка</a></p></li>
     </ul>
 
     <p>
@@ -24,6 +24,18 @@
         <a href="/users/login">Вход</a>
         <a href="/users/logout">Выход</a>
     </p>
+
+    {% if category_list %}
+        <h5>Категории товаров</h5>
+        <ul>
+            {% for category in category_list %}
+            <li>
+                <a href="/products/{{ category.id }}">{{category.product_category}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
   {% block content %}{% endblock %}
   {% block card %}{% endblock %}
 

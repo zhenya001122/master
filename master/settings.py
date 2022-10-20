@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -89,15 +89,16 @@ WSGI_APPLICATION = 'master.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-   "default": {
-       "ENGINE": "django.db.backends.postgresql",
-       "NAME": "master",
-       "USER": "master",
-       "PASSWORD": "master",
-       "HOST": "localhost",
-       "PORT": 5432,
-   }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DATABASE_NAME", "master"),
+        "USER": os.environ.get("DATABASE_USER", "master"),
+        "PASSWORD": os.environ.get("DATABASE_PASS", "master"),
+        "HOST": os.environ.get("DATABASE_HOST", "localhost"),
+        "PORT": 5432,
+    }
 }
+
 
 
 

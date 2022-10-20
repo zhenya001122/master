@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Products detail{% endblock %}
+
+{% block content %}
+    {% if product_object %}
+        {% if product_object.image %}
+            <img src="{{ product_object.image.url }}">
+        {% else %}
+            <img src="{% static 'no-image.jpg' %}" alt="{{ product_object.name }}">
+{#             <img src="{% static 'no-image.jpg' %}" class="img-fluid img-thumbnail" alt="{{ product_object.name }}">#}
+        {% endif %}
+        <p>Артикул - {{ product_object.vendor_cod }}</p>
+        <p>Наименование - {{ product_object.name }}</p>
+        <p>Описание - {{ product_object.description }}</p>
+        <p>Цена - {{  product_object.cost }} р.</p>
+        <p>{{  product_object.status }}</p>
+    {% endif %}
+
+{% endblock %}

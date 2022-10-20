@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from products.views import home
+from products.views import home, products, products_detail
 from blog.views import blog_add
 
 urlpatterns = [
@@ -24,6 +24,8 @@ urlpatterns = [
     path('', home, name='home'),
     path('users/', include('users.urls')),
     path('blog/', blog_add, name='blog'),
+    path('products/<int:category_id>', products, name='products'),
+    path('products_detail/<int:id>', products_detail, name='products_detail')
 ]
 
 if settings.DEBUG:
