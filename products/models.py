@@ -9,12 +9,14 @@ class Category(models.Model):
     def __str__(self):
         return self.product_category
 
+
 class Status(models.Model):
     availability = models.CharField(max_length=20, verbose_name='Наличие',
                                     blank=True, null=True)
 
     def __str__(self):
         return self.availability
+
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
@@ -28,6 +30,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Purchase(models.Model):
     user = models.ForeignKey(

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 {% load static %}
 
 {% block title %}Products detail{% endblock %}
@@ -16,6 +17,21 @@
         <p>Описание - {{ product_object.description }}</p>
         <p>Цена - {{  product_object.cost }} р.</p>
         <p>{{ product_object.status }}</p>
-    {% endif %}
 
+        <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <form method="POST" class="post-form">
+          {% csrf_token %}
+          {{ comment_form|crispy }}
+          <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+        </form>
+      </div>
+    </div>
+  </div>
+    {% endif %}
+    {% for comment in comments %}
+        <p> {{ comment.text }}</p>
+        <p> {{ comment.user }}</p>
+    {% endfor %}
 {% endblock %}

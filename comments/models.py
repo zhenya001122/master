@@ -3,7 +3,7 @@ from products.models import Product
 
 
 class Comment(models.Model):
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=200, verbose_name='Комментарий')
     product = models.ForeignKey(Product, related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(
         'users.User', on_delete=models.CASCADE
@@ -13,7 +13,7 @@ class Comment(models.Model):
     active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
-    def __str__(self):
-        return self.user, self.product
+    # def __str__(self):
+    #     return self.user, self.product, self.text

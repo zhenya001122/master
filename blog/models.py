@@ -14,5 +14,8 @@ class Blog(models.Model):
     text = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return f'{self.author}. {self.title} {self.text} {self.created_at}'

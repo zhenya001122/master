@@ -22,10 +22,10 @@
             <ul>
                 {% for bl in blog %}
                 <li>
-                    <h1>Заголовок - {{ bl.title }}</h1>
-                    <p>Новость - {{ bl.text }}</p>
+                    <h1>{{ bl.title }}</h1>
+                    <p>Новость: {{ bl.text }}</p>
                     <p>Автор: {{  bl.author.last_name }} {{ bl.author.first_name }}</p>
-                    <p>Дата создания - {{ bl.created_at }}</p>
+                    <p>Дата создания: {{ bl.created_at }}</p>
                 </li>
                 {% endfor %}
             </ul>
