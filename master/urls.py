@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from products.views import home, products, products_detail
-from blog.views import blog_add
+from blog.views import blog_add, news_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,7 +25,8 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('blog/', blog_add, name='blog'),
     path('products/<int:category_id>', products, name='products'),
-    path('products_detail/<int:id>', products_detail, name='products_detail')
+    path('products_detail/<int:id>', products_detail, name='products_detail'),
+    path("news_detail/<int:news_id>", news_detail, name='news_detail'),
 ]
 
 if settings.DEBUG:

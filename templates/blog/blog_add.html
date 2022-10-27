@@ -22,10 +22,7 @@
             <ul>
                 {% for bl in blog %}
                 <li>
-                    <h1>{{ bl.title }}</h1>
-                    <p>Новость: {{ bl.text }}</p>
-                    <p>Автор: {{  bl.author.last_name }} {{ bl.author.first_name }}</p>
-                    <p>Дата создания: {{ bl.created_at }}</p>
+                    <a href="/news_detail/{{ bl.id }}"><h5>{{ bl.title }}</h5></a>
                 </li>
                 {% endfor %}
             </ul>

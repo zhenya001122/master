@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+
+{% block title %}news{% endblock %}
+
+{% block content %}
+    <div>
+            {% if news %}
+                <h1>{{ news.title }}</h1>
+                <p>{{ news.created_at }}</p>
+                <p>Новость: {{ news.text }}</p>
+                <p>Автор: {{  news.author.last_name }} {{ news.author.first_name }}</p>
+            {% endif %}
+    </div>
+    <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <form method="POST" class="post-form">
+          {% csrf_token %}
+          {{ comment_form|crispy }}
+          <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+        </form>
+      </div>
+    </div>
+  </div>
+    {% for comment in comments %}
+        <p> -{{ comment.user.first_name }}</p>
+        <p>{{ comment.created }}</p>
+        <p> {{ comment.text }}</p>
+    {% endfor %}
+{% endblock %}
+

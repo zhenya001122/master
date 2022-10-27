@@ -17,7 +17,6 @@
         <p>Описание - {{ product_object.description }}</p>
         <p>Цена - {{  product_object.cost }} р.</p>
         <p>{{ product_object.status }}</p>
-
         <div class="container">
     <div class="row">
       <div class="col-3">
@@ -31,7 +30,7 @@
   </div>
     {% endif %}
     {% for comment in comments %}
+        <p> -{{ comment.user.first_name }}</p>
         <p> {{ comment.text }}</p>
-        <p> {{ comment.user }}</p>
     {% endfor %}
 {% endblock %}

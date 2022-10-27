@@ -24,6 +24,9 @@
         <a href="/users/login">Вход</a>
         <a href="/users/logout">Выход</a>
     </p>
+    {% if request.user %}
+        <p>Добро пожаловать в этот чудесный магазин, {{ request.user.first_name }}</p>
+    {% endif %}
 
     {% if category_list %}
         <h5>Категории товаров</h5>
