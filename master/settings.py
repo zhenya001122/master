@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'users',
     'blog',
+    'basket',
     'products',
     'profiles',
     'comments',
@@ -157,3 +158,4 @@ MEDIA_URL = "media/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CART_SESSION_ID = 'basket'
