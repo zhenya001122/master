@@ -6,33 +6,40 @@
 
 {% block content %}
     <p>Детальная информация</p>
-    {% if product_object %}
-        {% if product_object.image %}
-            <img src="{{ product_object.image.url }}">
+    {% if product %}
+        {% if product.image %}
+            <img src="{{ product.image.url }}">
         {% else %}
-            <img src="{% static 'no-image.jpg' %}" alt="{{ product_object.name }}">
+            <img src="{% static 'no-image.jpg' %}" alt="{{ product.name }}">
         {% endif %}
-        <p>Артикул - {{ product_object.vendor_cod }}</p>
-        <p>Наименование - {{ product_object.name }}</p>
-        <p>Описание - {{ product_object.description }}</p>
-        <p>Цена - {{  product_object.cost }} р.</p>
-        <p>{{ product_object.status }}</p>
-        <a href="#" class="btn btn-primary">В корзину</a>
-                <a href="#" class="btn btn-primary">Купить</a>
-        <div class="container">
-    <div class="row">
-      <div class="col-3">
-        <form method="POST" class="post-form">
-          {% csrf_token %}
-          {{ comment_form|crispy }}
-          <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+        <p>Артикул - {{ product.vendor_cod }}</p>
+        <p>Наименование - {{ product.name }}</p>
+        <p>Описание - {{ product.description }}</p>
+        <p>Цена - {{ product.cost }} р.</p>
+        <p>{{ product.status }}</p>
+
+        <form action="{% url "basket_add" product.id %}" method="post">
+            {{ basket_product_form }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">В корзину</button>
         </form>
-      </div>
-    </div>
-  </div>
+
+
+        {#        <a href="#" class="btn btn-primary">Купить</a>#}<br>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <form method="POST" class="post-form">
+                        {% csrf_token %}
+                        {{ comment_form|crispy }}
+                        <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     {% endif %}
     {% for comment in comments %}
-        <p> -{{ comment.user.first_name }}</p>
+        <b> -{{ comment.user.first_name }}</b>
         <p> {{ comment.text }}</p>
     {% endfor %}
 {% endblock %}

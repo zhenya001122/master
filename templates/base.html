@@ -22,10 +22,12 @@
         <a href="/blog">Новостной блог</a>
         <a href="/users/register">Регистрация</a>
         <a href="/users/login">Вход</a>
-        <a href="/users/logout">Выход</a>
+        <a href="/users/logout">Выход</a><br>
+        <a href="/basket_detail">Ваша корзина</a>
     </p>
     {% if request.user %}
         <p>Добро пожаловать в этот чудесный магазин, {{ request.user.first_name }}</p>
+
     {% endif %}
 
     {% if category_list %}

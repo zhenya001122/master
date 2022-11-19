@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Корзина
+{% endblock %}
+{% block content %}
+    <h1>Корзина</h1>
+    <table class="basket">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit price</th>
+            <th>Price</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in basket %}
+            {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                    {% static 'no-image.jpg' %}
+                                {% endif %}">
+                        </a>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td class="num">{{ item.cost }} p.</td>
+                    <td class="num">{{ item.total_cost }} p.</td>
+                    <td><a href="{% url "basket_remove" product.id%}"class="btn btn-primary">Удалить</a></td>
+                    <td><a href="#" class="btn btn-primary">Купить</a></td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Итого товаров на сумму:</td>
+            <td colspan="4"></td>
+            <td class="num">{{ basket.get_total_cost }} p.</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url "home" %}" class="button light">Продолжить покупки</a>
+    </p>
+{% endblock %}

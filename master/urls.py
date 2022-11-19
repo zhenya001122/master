@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+
+from basket.views import basket_detail, basket_add, basket_remove
 from products.views import home, products, products_detail
 from blog.views import blog_add, news_detail
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,8 +28,11 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('blog/', blog_add, name='blog'),
     path('products/<int:category_id>', products, name='products'),
-    path('products_detail/<int:id>', products_detail, name='products_detail'),
+    path('products_detail/<int:product_id>', products_detail, name='products_detail'),
     path("news_detail/<int:news_id>", news_detail, name='news_detail'),
+    path('basket_detail', basket_detail, name='basket_detail'),
+    path('basket_add/<int:product_id>', basket_add, name='basket_add'),
+    path('basket_remove/<int:product_id>', basket_remove, name='basket_remove'),
 ]
 
 if settings.DEBUG:

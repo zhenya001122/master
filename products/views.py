@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 
+from basket.forms import BasketAddProductForm
 from comments.forms import CommentForm
 from products.models import Category, Product
 
@@ -23,27 +24,29 @@ def products(request, category_id):
     return render(request, 'products/products_card.html', context)
 
 
-def products_detail(request, id):
+def products_detail(request, product_id):
     category_list = Category.objects.all()
-    product_object = get_object_or_404(Product, id=id)
-    comments = product_object.comments.filter(active=True)
+    product = get_object_or_404(Product, id=product_id)
+    comments = product.comments.filter(active=True)
     new_comment = None
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.product = product_object
+            new_comment.product = product
             new_comment.user = request.user
             new_comment.save()
             return redirect(request.path)
     else:
         comment_form = CommentForm()
+    basket_product_form = BasketAddProductForm()
 
     context = {
         'category_list': category_list,
-        'product_object': product_object,
+        'product': product,
         'comments': comments,
         'new_comment': new_comment,
-        'comment_form': comment_form
+        'comment_form': comment_form,
+        'basket_product_form': basket_product_form
     }
     return render(request, 'products/products_detail.html', context)
