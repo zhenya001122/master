@@ -30,7 +30,7 @@ urlpatterns = [
     path('products/<int:category_id>', products, name='products'),
     path('products_detail/<int:product_id>', products_detail, name='products_detail'),
     path("news_detail/<int:news_id>", news_detail, name='news_detail'),
-    path('basket_detail', basket_detail, name='basket_detail'),
+    path('basket_detail/', basket_detail, name='basket_detail'),
     path('basket_add/<int:product_id>', basket_add, name='basket_add'),
     path('basket_remove/<int:product_id>', basket_remove, name='basket_remove'),
 ]

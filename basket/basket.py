@@ -12,7 +12,7 @@ class Basket(object):
         self.session = request.session
         basket = self.session.get(settings.BASKET_SESSION_ID)
         if not basket:
-            # save an empty cart in the session
+            # сохранить пустую корзину в сеансе
             basket = self.session[settings.BASKET_SESSION_ID] = {}
         self.basket = basket
 
