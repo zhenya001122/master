@@ -35,7 +35,6 @@
                     <td class="num">{{ item.cost }} p.</td>
                     <td class="num">{{ item.total_cost }} p.</td>
                     <td><a href="{% url "basket_remove" product.id%}"class="btn btn-primary">Удалить</a></td>
-                    <td><a href="#" class="btn btn-primary">Купить</a></td>
                 </tr>
             {% endwith %}
         {% endfor %}
@@ -43,6 +42,7 @@
             <td>Итого товаров на сумму:</td>
             <td colspan="4"></td>
             <td class="num">{{ basket.get_total_cost }} p.</td>
+            <td><a href="{% url "order_create" %}" class="btn btn-primary">оформить заказ</a></td>
         </tr>
         </tbody>
     </table>

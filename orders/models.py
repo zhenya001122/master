@@ -16,7 +16,7 @@ class Order(models.Model):
     user = models.ForeignKey(
         User, related_name="orders", on_delete=models.CASCADE
     )
-    address = models.OneToOneField(Address, related_name="orders", on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, related_name="orders", on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, blank=True, null=True)
 

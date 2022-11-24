@@ -26,7 +26,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Purchase)
 class PurchaseAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product', 'order', "price", 'quantity')
+    list_display = ('user', 'product', 'order', "cost", 'quantity')
     list_filter = ('user', 'order')
     search_fields = ('user', 'order')
 
