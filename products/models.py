@@ -1,5 +1,6 @@
 from django.db import models
 from orders.models import Order
+from users.models import User
 
 
 class Category(models.Model):
@@ -48,3 +49,14 @@ class Purchase(models.Model):
 
     def get_cost(self):
         return self.cost * self.quantity
+
+
+class Balance(models.Model):
+    summ = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Ваш баланс', default=10000)
+    user = models.OneToOneField(
+        User, related_name="balances", on_delete=models.CASCADE
+    )
+    purchase = models.ForeignKey(Purchase, related_name="balances", on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.summ} {self.user}"
