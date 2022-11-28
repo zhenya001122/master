@@ -29,6 +29,9 @@
         <p>Добро пожаловать в этот чудесный магазин, {{ request.user.first_name }}</p>
 
     {% endif %}
+    {% if balance %}
+        <p>Ваш баланс составляет - {{ balance.summ }}</p>
+    {% endif %}
 
     {% if category_list %}
         <h5>Категории товаров</h5>

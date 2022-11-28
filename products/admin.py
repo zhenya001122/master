@@ -1,5 +1,5 @@
 from django.contrib import admin
-from products.models import Product, Status, Category, Purchase
+from products.models import Product, Status, Category, Purchase, Balance
 
 
 class PurchaseInline(admin.TabularInline):
@@ -30,3 +30,7 @@ class PurchaseAdmin(admin.ModelAdmin):
     list_filter = ('user', 'order')
     search_fields = ('user', 'order')
 
+
+@admin.register(Balance)
+class BalanceAdmin(admin.ModelAdmin):
+    list_display = ('user', 'summ')

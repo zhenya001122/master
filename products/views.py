@@ -3,25 +3,43 @@ from django.shortcuts import get_object_or_404
 
 from basket.forms import BasketAddProductForm
 from comments.forms import CommentForm
-from products.models import Category, Product
+from products.models import Category, Product, Balance
 
 
 def home(request):
-    category_list = Category.objects.all()
-    context = {
-        'category_list': category_list
-    }
-    return render(request, "base.html", context)
+    if request.user.is_authenticated:
+        balance = Balance.objects.get(user=request.user.id)
+        category_list = Category.objects.all()
+        context = {
+            'category_list': category_list,
+            "balance": balance
+        }
+        return render(request, "base.html", context)
+    else:
+        category_list = Category.objects.all()
+        context = {
+            'category_list': category_list
+        }
+        return render(request, "base.html", context)
 
 
 def products(request, category_id):
     product_list = Product.objects.filter(category=category_id)
     category_list = Category.objects.all()
-    context = {
-        'category_list': category_list,
-        'product_list': product_list
-    }
-    return render(request, 'products/products_card.html', context)
+    if request.user.is_authenticated:
+        balance = Balance.objects.get(user=request.user.id)
+        context = {
+            'category_list': category_list,
+            'product_list': product_list,
+            "balance": balance
+        }
+        return render(request, 'products/products_card.html', context)
+    else:
+        context = {
+            'category_list': category_list,
+            'product_list': product_list,
+        }
+        return render(request, 'products/products_card.html', context)
 
 
 def products_detail(request, product_id):

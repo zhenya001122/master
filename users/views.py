@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 
+from products.models import Balance
 from users.forms import RegisterForm, LoginForm
 
 from users.models import User
@@ -20,6 +21,8 @@ def register_view(request):
             user = User(**form.cleaned_data)
             user.set_password(form.cleaned_data["password"])
             user.save()
+            balance = Balance.objects.create(user=user)
+            balance.save()
             return redirect("/")
     else:
         form = RegisterForm()
@@ -35,7 +38,7 @@ def login_view(request):
         if form.is_valid():
             user = authenticate(request=request, **form.cleaned_data)
             if user is None:
-                return HttpResponse("BadRequest", status=400)
+                return HttpResponse("Введите верные данные или зарегистрируйтесь", status=400)
             login(request, user)
             return redirect("/")
     else:
