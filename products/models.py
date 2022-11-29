@@ -45,7 +45,7 @@ class Purchase(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return '{}'.format(self.id)
+        return f"{self.product}, {self.cost}, {self.quantity}"
 
     def get_cost(self):
         return self.cost * self.quantity

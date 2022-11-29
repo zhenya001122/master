@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 
 from basket.views import basket_detail, basket_add, basket_remove
-from products.views import home, products, products_detail
+from products.views import home, products, products_detail, purchases
 from orders.views import order_create
 from blog.views import blog_add, news_detail
 
@@ -35,6 +35,7 @@ urlpatterns = [
     path('basket_add/<int:product_id>', basket_add, name='basket_add'),
     path('basket_remove/<int:product_id>', basket_remove, name='basket_remove'),
     path('order_create/', order_create, name='order_create'),
+    path('purchases/', purchases, name='purchases'),
 ]
 
 if settings.DEBUG:

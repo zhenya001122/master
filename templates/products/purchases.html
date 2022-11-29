@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Покупки</title>
+</head>
+<body>
+{% for p in purchases %}
+        <p>Наименование товара - {{ p.product }}</p>
+        <p>Стоимость за единицу - {{ p.cost }} р.</p>
+        <p>Количество - {{ p.quantity }} шт.</p>
+        <p>Статус заказа - {{ p.order.status }}</p>
+    {% endfor %}
+</body>
+</html>
