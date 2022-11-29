@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from products.models import Purchase, Balance
 from orders.forms import OrderCreateForm, AddressCreateForm
 from basket.basket import Basket
+from profiles.models import Address
 
 
 def order_create(request):
@@ -26,7 +27,7 @@ def order_create(request):
                                             product=item['product'],
                                             cost=item['cost'],
                                             quantity=item['quantity'])
-                    balance.summ -= item['cost']
+                    balance.summ -= item['cost'] * item['quantity']
                     balance.save()
                 # очистка корзины
                 basket.clear()
