@@ -2,56 +2,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <link href="{% static 'index.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="{% static 'index.css' %}" rel="stylesheet">
     <link href="{% static 'signin.css.css' %}" rel="stylesheet">
-  {% block styles %}{% endblock %}
+    {% block styles %}{% endblock %}
 </head>
 <body>
-    <p>Здесь классный Frontend, просто он невидимый</p>
-    <ul>
-      <li><p> <a href="/">Главная</a></p></li>
-      <li><p> <a href="/admin">Админка</a></p></li>
-    </ul>
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+        </a>
 
-    <p>
-        <a href="/blog">Новостной блог</a>
-        <a href="/users/register">Регистрация</a>
-        <a href="/users/login">Вход</a>
-        <a href="/users/logout">Выход</a><br>
-        <a href="/basket_detail">Ваша корзина</a>
-        <a href="/purchases">Ваши покупки</a>
-
-    </p>
-    {% if request.user %}
-        <p>Добро пожаловать в этот чудесный магазин, {{ request.user.first_name }}</p>
-
-    {% endif %}
-    {% if balance %}
-        <p>Ваш баланс составляет - {{ balance.summ }}</p>
-    {% endif %}
-
-    {% if category_list %}
-        <h5>Категории товаров</h5>
-        <ul>
-            {% for category in category_list %}
-            <li>
-                <a href="/products/{{ category.id }}">{{category.product_category}}</a>
-            </li>
-            {% endfor %}
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+            <li><a href="/admin" class="nav-link px-2 link-dark">Панель администратора</a></li>
         </ul>
-    {% endif %}
 
-  {% block content %}{% endblock %}
-  {% block card %}{% endblock %}
+        <div class="col-md-3 text-end">
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/users/login" class="nav-link px-2 link-dark">Вход</a></li>
+                <li><a href="/users/logout" class="nav-link px-2 link-dark">Выход</a></li>
+                <li><a href="/users/register" class="nav-link px-2 link-dark">Регистрация</a></li>
+            </ul>
+{#            <button type="button" class="btn btn-outline-primary me-2">Login</button>#}
+{#            <button type="button" class="btn btn-primary">Sign-up</button>#}
+        </div>
+    </header>
+</div>
+<p>
+    <a href="/blog">Новостной блог</a>
+    <a href="/basket_detail">Ваша корзина</a>
+    <a href="/purchases">Ваши покупки</a>
+</p>
+{% if request.user %}
+    <p>Добро пожаловать в этот чудесный магазин, {{ request.user.first_name }}</p>
+{% endif %}
+{% if balance %}
+    <p>Ваш баланс составляет - {{ balance.summ }}</p>
+{% endif %}
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-  {% block scripts %}{% endblock %}
+{% if category_list %}
+    <h5>Категории товаров</h5>
+    <ul>
+        {% for category in category_list %}
+            <div class="list-group">
+                <a href="/products/{{ category.id }}" class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                   aria-current="true">
+                    <img src="data:image/jpeg;base64,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" alt="twbs" width="32" height="32"
+                         class="rounded-circle flex-shrink-0">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <h6 class="mb-0">{{ category.product_category }}</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% block content %}{% endblock %}
+{% block card %}{% endblock %}
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container my-5">
+
+  <footer class="bg-dark text-center text-white">
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2020 Copyright:
+    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+</div>
+<!-- End of .container -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>
