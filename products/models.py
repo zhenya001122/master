@@ -19,6 +19,12 @@ class Status(models.Model):
         return self.availability
 
 
+class File(models.Model):
+    file = models.FileField(upload_to="files/")
+    description = models.CharField(max_length=200, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
