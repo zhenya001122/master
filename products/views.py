@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from basket.forms import BasketAddProductForm
 from comments.forms import CommentForm
 from products.models import Category, Product, Balance, Purchase
+import csv
 
 
 def home(request):
@@ -24,22 +25,33 @@ def home(request):
 
 
 def products(request, category_id):
-    product_list = Product.objects.filter(category=category_id)
-    category_list = Category.objects.all()
-    if request.user.is_authenticated:
-        balance = Balance.objects.get(user=request.user.id)
-        context = {
-            'category_list': category_list,
-            'product_list': product_list,
-            "balance": balance
-        }
-        return render(request, 'products/products_card.html', context)
-    else:
-        context = {
-            'category_list': category_list,
-            'product_list': product_list,
-        }
-        return render(request, 'products/products_card.html', context)
+    # в блоке try/except - читает csv файл и заменяет соответсвующие значения полей в БД
+    try:
+        with open("/home/zhenya/Рабочий стол/projects/master/media/files/products.csv", encoding='utf-8') as r_file:
+            file_reader = csv.DictReader(r_file, delimiter=",")
+            for row in file_reader:
+                price = Product.objects.get(id=row["id"])
+                price.cost = row["cost"]
+                price.save(update_fields=["cost"])
+    except:
+        print("нет файла")
+    finally:
+        product_list = Product.objects.filter(category=category_id)
+        category_list = Category.objects.all()
+        if request.user.is_authenticated:
+            balance = Balance.objects.get(user=request.user.id)
+            context = {
+                'category_list': category_list,
+                'product_list': product_list,
+                "balance": balance
+            }
+            return render(request, 'products/products_card.html', context)
+        else:
+            context = {
+                'category_list': category_list,
+                'product_list': product_list,
+            }
+            return render(request, 'products/products_card.html', context)
 
 
 def products_detail(request, product_id):
