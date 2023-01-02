@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_cleanup.apps.CleanupConfig',
     'users',
     'blog',
     'basket',
