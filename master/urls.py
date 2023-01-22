@@ -36,6 +36,7 @@ urlpatterns = [
     path('basket_remove/<int:product_id>', basket_remove, name='basket_remove'),
     path('order_create/', order_create, name='order_create'),
     path('purchases/', purchases, name='purchases'),
+    path('api/', include('api.urls')),
 ]
 
 if settings.DEBUG:
