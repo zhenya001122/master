@@ -24,6 +24,7 @@ from blog.views import blog_add, news_detail
 
 
 urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('users/', include('users.urls')),

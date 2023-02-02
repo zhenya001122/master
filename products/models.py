@@ -4,6 +4,7 @@ from users.models import User
 
 
 class Category(models.Model):
+    """Модель категорий продуктов"""
     product_category = models.CharField(max_length=50, verbose_name='Категория товара',
                                         blank=True, null=True)
 
@@ -12,6 +13,7 @@ class Category(models.Model):
 
 
 class Status(models.Model):
+    """Модель статуса продукта"""
     availability = models.CharField(max_length=20, verbose_name='Наличие',
                                     blank=True, null=True)
 
@@ -26,6 +28,7 @@ class File(models.Model):
 
 
 class Product(models.Model):
+    """Модель продукта"""
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
     cost = models.DecimalField(max_digits=7, decimal_places=2)
@@ -40,6 +43,7 @@ class Product(models.Model):
 
 
 class Purchase(models.Model):
+    """Модель покупок"""
     user = models.ForeignKey(
         'users.User', related_name="purchases", on_delete=models.CASCADE
     )
@@ -58,6 +62,7 @@ class Purchase(models.Model):
 
 
 class Balance(models.Model):
+    """Модель баланса пользователя"""
     summ = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Ваш баланс', default=10000)
     user = models.OneToOneField(
         User, related_name="balances", on_delete=models.CASCADE
