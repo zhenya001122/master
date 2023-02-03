@@ -21,7 +21,22 @@ from basket.views import basket_detail, basket_add, basket_remove
 from products.views import home, products, products_detail, purchases
 from orders.views import order_create
 from blog.views import blog_add, news_detail
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Snippets API",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@snippets.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=[permissions.AllowAny],
+)
 
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
@@ -38,6 +53,7 @@ urlpatterns = [
     path('order_create/', order_create, name='order_create'),
     path('purchases/', purchases, name='purchases'),
     path('api/', include('api.urls')),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 
 if settings.DEBUG:
